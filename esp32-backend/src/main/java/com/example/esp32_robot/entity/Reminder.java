@@ -2,44 +2,38 @@ package com.example.esp32_robot.entity;
 // Reminder.java
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "reminders")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Reminder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private Long userId;
+    private String deviceId = "esp32-01";
+
+    @Column(length = 500)
+    private String content;
+
+    private LocalTime reminderTime;
+
+    @Column(length = 20)
+    private String repeat = "daily"; // daily, weekly, once
+
+    private Boolean enabled = true;
+
+    @Column(length = 1000)
+    private String note;
+
+    private LocalDateTime nextTriggerTime;
 
     @Column(nullable = false)
-    private String deviceId;
-
-    @Column(nullable = false)
-    private String content; // "早上8点 - 服用高血压药"
-
-    @Column(nullable = false)
-    private String reminderTime; // "08:00"
-
-    @Column(columnDefinition = "VARCHAR(20) DEFAULT 'daily'")
-    private String repeat; // "once", "daily", "weekly"
-
-    @Column(columnDefinition = "BOOLEAN DEFAULT TRUE")
-    private Boolean enabled;
-
-    private String note; // "饭后30分钟"
-
-    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt = LocalDateTime.now();
 }

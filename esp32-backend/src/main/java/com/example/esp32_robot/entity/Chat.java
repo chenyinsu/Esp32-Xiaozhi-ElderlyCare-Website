@@ -2,40 +2,36 @@ package com.example.esp32_robot.entity;
 
 // Chat.java
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "chats")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String deviceId = "esp32-01";
+    private Long userId = 1001L;
+
+    @Column(length = 20)
+    private String type = "text"; // text, audio
+
+    @Column(columnDefinition = "TEXT")
+    private String content;
+
+    @Column(length = 500)
+    private String audioUrl;
+
+    @Column(length = 50)
+    private String mood = "neutral";
+    private Double sentiment = 0.5;
+
+    @Column(columnDefinition = "TEXT")
+    private String keywordsJson;
+
     @Column(nullable = false)
-    private String deviceId;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @Column(columnDefinition = "TEXT")
-    private String question;
-
-    @Column(columnDefinition = "TEXT")
-    private String answer;
-
-    private String mood; // "positive", "negative", "neutral"
-
-    private Float sentimentScore; // 0.0 ~ 1.0
-
-    @Column(columnDefinition = "TEXT")
-    private String keywords;
-
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime timestamp = LocalDateTime.now();
 }

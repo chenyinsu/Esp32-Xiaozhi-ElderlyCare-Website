@@ -1,46 +1,68 @@
 package com.example.esp32_robot.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+package com.example.esp32robot.controller;
+
+import com.example.esp32_robot.dto.ApiResponse;
+import com.example.esp32_robot.dto.ReminderDTO;
+import com.example.esp32_robot.entity.Reminder;
+import com.example.esp32_robot.service.ReminderService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/reminders")
-@CrossOrigin
+@RequiredArgsConstructor
 public class ReminderController {
+    private final ReminderService reminderService;
 
-    @Autowired
-    private ReminderService reminderService;
+    @PostMapping
+    public ApiResponse<Reminder> createReminder(@Valid @RequestBody ReminderDTO dto) {
+        Reminder reminder = reminderService.createReminder(dto);
+        return ApiResponse.success(reminder);
+    }
 
     @GetMapping
-    public ApiResponse<List<ReminderDTO>> getReminders(@RequestParam Long userId) {
-        List<ReminderDTO> reminders = reminderService.getRemindersByUserId(userId);
+    public ApiResponse<List<Reminder>> getReminders(
+            @RequestParam(required = false) String deviceId,
+            @RequestParam(required = false) Long userId) {
+
+        List<Reminder> reminders;
+        if (deviceId != null) {
+            reminders = reminderService.getRemindersByDevice(deviceId);
+        } else if (userId != null) {
+            reminders = reminderService.getRemindersByUser(userId);
+        } else {
+            reminders = reminderService.getDueReminders();
+        }
+
         return ApiResponse.success(reminders);
     }
 
-    @PostMapping
-    public ApiResponse<ReminderDTO> createReminder(@RequestBody ReminderDTO dto) {
-        ReminderDTO created = reminderService.createReminder(dto);
-        return ApiResponse.success(created);
+    @GetMapping("/{id}")
+    public ApiResponse<Reminder> getReminder(@PathVariable Long id) {
+        Reminder reminder = reminderService.getReminder(id);
+        return ApiResponse.success(reminder);
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<ReminderDTO> updateReminder(
+    public ApiResponse<Reminder> updateReminder(
             @PathVariable Long id,
-            @RequestBody ReminderDTO dto) {
-        ReminderDTO updated = reminderService.updateReminder(id, dto);
-        return ApiResponse.success(updated);
+            @Valid @RequestBody ReminderDTO dto) {
+        Reminder reminder = reminderService.updateReminder(id, dto);
+        return ApiResponse.success(reminder);
     }
 
     @DeleteMapping("/{id}")
-    public ApiResponse<String> deleteReminder(@PathVariable Long id) {
+    public ApiResponse<Void> deleteReminder(@PathVariable Long id) {
         reminderService.deleteReminder(id);
-        return ApiResponse.success("删除成功");
+        return ApiResponse.success(null);
     }
 
     @PostMapping("/{id}/trigger")
-    public ApiResponse<String> triggerReminder(@PathVariable Long id) {
-        reminderService.triggerReminderImmediate(id);
-        return ApiResponse.success("已立即触发提醒");
+    public ApiResponse<Void> triggerReminder(@PathVariable Long id) {
+        reminderService.triggerReminder(id);
+        return ApiResponse.success(null);
     }
 }
