@@ -1,7 +1,5 @@
 package com.example.esp32_robot.scheduler;
 
-package com.example.esp32robot.scheduler;
-
 import com.example.esp32_robot.entity.Reminder;
 import com.example.esp32_robot.service.ReminderService;
 import com.example.esp32_robot.websocket.DeviceWebSocketHandler;

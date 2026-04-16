@@ -1,7 +1,5 @@
 package com.example.esp32_robot.controller;
 
-package com.example.esp32robot.controller;
-
 import com.example.esp32_robot.dto.ApiResponse;
 import com.example.esp32_robot.dto.ReminderDTO;
 import com.example.esp32_robot.entity.Reminder;
@@ -9,12 +7,14 @@ import com.example.esp32_robot.service.ReminderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/reminders")
 @RequiredArgsConstructor
 public class ReminderController {
+
     private final ReminderService reminderService;
 
     @PostMapping
