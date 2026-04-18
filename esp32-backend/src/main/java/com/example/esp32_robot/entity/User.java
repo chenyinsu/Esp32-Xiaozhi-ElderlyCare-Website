@@ -15,7 +15,7 @@ import java.util.List;
  * 包含老年人、社区工作人员、子女、医院等角色
  */
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @Data
 @ToString(exclude = {"managedElders", "emergencyContacts"})
 @EqualsAndHashCode(exclude = {"managedElders", "emergencyContacts"})

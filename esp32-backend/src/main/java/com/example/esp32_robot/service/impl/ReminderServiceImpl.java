@@ -8,19 +8,14 @@ import com.example.esp32_robot.exception.BusinessException;
 import com.example.esp32_robot.exception.ResourceNotFoundException;
 import com.example.esp32_robot.repository.*;
 import com.example.esp32_robot.service.ReminderService;
-import com.example.esp32_robot.service.base.BaseService;
+import com.example.esp32_robot.service.BaseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +31,8 @@ public class ReminderServiceImpl extends BaseService implements ReminderService 
     private final DeviceRepository deviceRepository;
     private final UserRepository userRepository;
     private final DtoConverter dtoConverter;
+
+    // ==================== 基础 CRUD 方法 ====================
 
     @Override
     public ReminderResponse createReminder(ReminderRequest request) {
@@ -58,77 +55,6 @@ public class ReminderServiceImpl extends BaseService implements ReminderService 
         log.info("Reminder created successfully with id: {}", savedReminder.getId());
 
         return dtoConverter.toReminderResponse(savedReminder);
-    }
-
-    private void calculateNextTriggerTime(Reminder reminder) {
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime nextTrigger = LocalDateTime.of(now.toLocalDate(), reminder.getRemindTime());
-
-        if (nextTrigger.isBefore(now)) {
-            nextTrigger = nextTrigger.plusDays(1);
-        }
-
-        // 根据重复类型调整
-        switch (reminder.getRepeatType()) {
-            case DAILY:
-                // 每天，保持当前计算
-                break;
-            case WEEKLY:
-                // 每周特定几天
-                nextTrigger = calculateNextWeeklyTrigger(reminder, nextTrigger);
-                break;
-            case WORKDAYS:
-                // 工作日
-                while (isWeekend(nextTrigger.toLocalDate())) {
-                    nextTrigger = nextTrigger.plusDays(1);
-                }
-                break;
-            case WEEKENDS:
-                // 周末
-                while (!isWeekend(nextTrigger.toLocalDate())) {
-                    nextTrigger = nextTrigger.plusDays(1);
-                }
-                break;
-            case NONE:
-            default:
-                // 不重复
-                break;
-        }
-
-        reminder.setNextTrigger(nextTrigger);
-    }
-
-    private LocalDateTime calculateNextWeeklyTrigger(Reminder reminder, LocalDateTime baseTime) {
-        if (reminder.getRepeatDays() == null || reminder.getRepeatDays().isEmpty()) {
-            return baseTime;
-        }
-
-        LocalDateTime nextTrigger = baseTime;
-        int maxAttempts = 7;
-        int attempts = 0;
-
-        while (attempts < maxAttempts) {
-            java.time.DayOfWeek dayOfWeek = nextTrigger.getDayOfWeek();
-            Reminder.DayOfWeek reminderDay = convertToReminderDay(dayOfWeek);
-
-            if (reminder.getRepeatDays().contains(reminderDay)) {
-                return nextTrigger;
-            }
-
-            nextTrigger = nextTrigger.plusDays(1);
-            attempts++;
-        }
-
-        return baseTime;
-    }
-
-    private Reminder.DayOfWeek convertToReminderDay(java.time.DayOfWeek dayOfWeek) {
-        return Reminder.DayOfWeek.valueOf(dayOfWeek.name());
-    }
-
-    private boolean isWeekend(LocalDate date) {
-        java.time.DayOfWeek day = date.getDayOfWeek();
-        return day == java.time.DayOfWeek.SATURDAY || day == java.time.DayOfWeek.SUNDAY;
     }
 
     @Override
@@ -161,26 +87,35 @@ public class ReminderServiceImpl extends BaseService implements ReminderService 
     }
 
     @Override
+    public void deleteReminder(Long id) {
+        log.info("Deleting reminder with id: {}", id);
+
+        if (!reminderRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Reminder", "id", id);
+        }
+
+        reminderRepository.deleteById(id);
+        log.info("Reminder deleted successfully");
+    }
+
+    // ==================== 查询方法 ====================
+
+    @Override
     @Transactional(readOnly = true)
     public PageResponse<ReminderResponse> queryReminders(ReminderQueryRequest request) {
         log.info("Querying reminders with filters");
 
-        Pageable pageable = createPageable(request.getPage(), request.getSize(),
-                Sort.by(Sort.Direction.ASC, "remindTime"));
+        List<Reminder> allReminders = reminderRepository.findAll();
+        List<ReminderResponse> filteredResponses = filterAndConvertReminders(allReminders, request);
 
-        Page<Reminder> reminderPage;
+        int start = (request.getPage() - 1) * request.getSize();
+        int end = Math.min(start + request.getSize(), filteredResponses.size());
 
-        if (request.getUserId() != null) {
-            List<Reminder> reminders = reminderRepository.findByUserIdOrderByRemindTimeAsc(request.getUserId());
-            reminderPage = Page.empty(pageable);
-        } else {
-            reminderPage = reminderRepository.findAll(pageable);
-        }
+        List<ReminderResponse> pagedContent = start < filteredResponses.size()
+                ? filteredResponses.subList(start, end)
+                : List.of();
 
-        List<ReminderResponse> filteredResponses = filterAndConvertReminders(
-                reminderPage.getContent(), request);
-
-        return PageResponse.of(filteredResponses, request.getPage(), request.getSize(),
+        return PageResponse.of(pagedContent, request.getPage(), request.getSize(),
                 (long) filteredResponses.size());
     }
 
@@ -188,17 +123,22 @@ public class ReminderServiceImpl extends BaseService implements ReminderService 
                                                              ReminderQueryRequest request) {
         return reminders.stream()
                 .filter(r -> filterByDeviceId(r, request.getDeviceId()))
+                .filter(r -> filterByUserId(r, request.getUserId()))
                 .filter(r -> filterByReminderType(r, request.getReminderType()))
                 .filter(r -> filterByRepeatType(r, request.getRepeatType()))
                 .filter(r -> filterByIsActive(r, request.getIsActive()))
                 .filter(r -> filterByIsTaken(r, request.getIsTaken()))
                 .filter(r -> filterByMedicationName(r, request.getMedicationName()))
                 .map(dtoConverter::toReminderResponse)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private boolean filterByDeviceId(Reminder reminder, Long deviceId) {
         return deviceId == null || reminder.getDevice().getId().equals(deviceId);
+    }
+
+    private boolean filterByUserId(Reminder reminder, Long userId) {
+        return userId == null || reminder.getUser().getId().equals(userId);
     }
 
     private boolean filterByReminderType(Reminder reminder, Reminder.ReminderType type) {
@@ -214,15 +154,13 @@ public class ReminderServiceImpl extends BaseService implements ReminderService 
     }
 
     private boolean filterByIsTaken(Reminder reminder, Boolean isTaken) {
-        return isTaken == null ||
-                (reminder.getReminderType() != Reminder.ReminderType.MEDICATION) ||
-                reminder.getIsTaken().equals(isTaken);
+        return isTaken == null || reminder.getReminderType() != Reminder.ReminderType.MEDICATION
+                || reminder.getIsTaken().equals(isTaken);
     }
 
     private boolean filterByMedicationName(Reminder reminder, String medicationName) {
-        return medicationName == null ||
-                (reminder.getMedicationName() != null &&
-                        reminder.getMedicationName().toLowerCase().contains(medicationName.toLowerCase()));
+        return medicationName == null || (reminder.getMedicationName() != null &&
+                reminder.getMedicationName().toLowerCase().contains(medicationName.toLowerCase()));
     }
 
     @Override
@@ -248,8 +186,20 @@ public class ReminderServiceImpl extends BaseService implements ReminderService 
     public List<ReminderResponse> getTodayReminders() {
         log.info("Fetching today's reminders");
 
-        List<Reminder> reminders = reminderRepository.findTodayReminders();
-        return dtoConverter.toReminderResponseList(reminders);
+        // 获取所有激活的提醒
+        List<Reminder> activeReminders = reminderRepository.findByIsActiveTrueOrderByRemindTimeAsc();
+
+        // 在内存中过滤今天的提醒
+        LocalDate today = LocalDate.now();
+        java.time.DayOfWeek todayDayOfWeek = today.getDayOfWeek();
+
+        List<Reminder> todayReminders = activeReminders.stream()
+                .filter(r -> isReminderForToday(r, today, todayDayOfWeek))
+                .collect(Collectors.toList());
+
+        log.info("Found {} reminders for today", todayReminders.size());
+
+        return dtoConverter.toReminderResponseList(todayReminders);
     }
 
     @Override
@@ -259,6 +209,49 @@ public class ReminderServiceImpl extends BaseService implements ReminderService 
 
         List<Reminder> reminders = reminderRepository.findRemindersToTrigger(LocalDateTime.now());
         return dtoConverter.toReminderResponseList(reminders);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Reminder> getDueReminders() {
+        log.info("Fetching due reminders");
+
+        LocalDateTime now = LocalDateTime.now();
+
+        List<Reminder> dueReminders = reminderRepository.findAll().stream()
+                .filter(Reminder::getIsActive)
+                .filter(r -> r.getNextTrigger() != null)
+                .filter(r -> r.getNextTrigger().isBefore(now) || r.getNextTrigger().isEqual(now))
+                .collect(Collectors.toList());
+
+        log.info("Found {} due reminders", dueReminders.size());
+        return dueReminders;
+    }
+
+    // ==================== 业务方法 ====================
+
+    @Override
+    public void triggerReminder(Long reminderId) {
+        log.info("Triggering reminder: {}", reminderId);
+
+        Reminder reminder = reminderRepository.findById(reminderId)
+                .orElseThrow(() -> new ResourceNotFoundException("Reminder", "id", reminderId));
+
+        if (!reminder.getIsActive()) {
+            log.warn("Reminder {} is not active, skipping", reminderId);
+            return;
+        }
+
+        // 更新最后触发时间
+        reminder.setLastTriggered(LocalDateTime.now());
+
+        // 计算下次触发时间
+        calculateNextTriggerTime(reminder);
+
+        reminderRepository.save(reminder);
+
+        log.info("Reminder triggered successfully: {} (next trigger: {})",
+                reminder.getTitle(), reminder.getNextTrigger());
     }
 
     @Override
@@ -292,7 +285,7 @@ public class ReminderServiceImpl extends BaseService implements ReminderService 
         List<Reminder> medicationReminders = reminderRepository.findByUserIdOrderByRemindTimeAsc(userId)
                 .stream()
                 .filter(r -> r.getReminderType() == Reminder.ReminderType.MEDICATION)
-                .toList();
+                .collect(Collectors.toList());
 
         long totalReminders = medicationReminders.size();
         long takenCount = medicationReminders.stream().filter(Reminder::getIsTaken).count();
@@ -319,18 +312,6 @@ public class ReminderServiceImpl extends BaseService implements ReminderService 
     }
 
     @Override
-    public void deleteReminder(Long id) {
-        log.info("Deleting reminder with id: {}", id);
-
-        if (!reminderRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Reminder", "id", id);
-        }
-
-        reminderRepository.deleteById(id);
-        log.info("Reminder deleted successfully");
-    }
-
-    @Override
     public void batchUpdateReminderStatus(List<Long> ids, Boolean isActive) {
         log.info("Batch updating reminder status for {} reminders to {}", ids.size(), isActive);
 
@@ -338,39 +319,151 @@ public class ReminderServiceImpl extends BaseService implements ReminderService 
         log.info("Batch update completed");
     }
 
+    // ==================== 私有辅助方法 ====================
+
     /**
-     * 定时任务：每小时检查需要触发的提醒
+     * 判断提醒是否在今天需要触发
      */
-    @Scheduled(cron = "0 0 * * * *")
-    @Transactional
-    public void triggerReminders() {
-        log.info("Running scheduled reminder trigger task");
-
-        List<Reminder> remindersToTrigger = reminderRepository.findRemindersToTrigger(LocalDateTime.now());
-
-        for (Reminder reminder : remindersToTrigger) {
-            try {
-                triggerReminder(reminder);
-
-                // 更新最后触发时间
-                reminder.setLastTriggered(LocalDateTime.now());
-
-                // 计算下次触发时间
-                calculateNextTriggerTime(reminder);
-
-                reminderRepository.save(reminder);
-            } catch (Exception e) {
-                log.error("Failed to trigger reminder: {}", reminder.getId(), e);
-            }
+    private boolean isReminderForToday(Reminder reminder, LocalDate today, java.time.DayOfWeek todayDayOfWeek) {
+        if (reminder.getRepeatType() == null) {
+            return false;
         }
 
-        log.info("Triggered {} reminders", remindersToTrigger.size());
+        switch (reminder.getRepeatType()) {
+            case DAILY:
+                return true;
+
+            case WEEKLY:
+                if (reminder.getRepeatDays() == null || reminder.getRepeatDays().isEmpty()) {
+                    return false;
+                }
+                Reminder.DayOfWeek reminderDay = convertToReminderDay(todayDayOfWeek);
+                return reminder.getRepeatDays().contains(reminderDay);
+
+            case WORKDAYS:
+                return todayDayOfWeek != java.time.DayOfWeek.SATURDAY &&
+                        todayDayOfWeek != java.time.DayOfWeek.SUNDAY;
+
+            case WEEKENDS:
+                return todayDayOfWeek == java.time.DayOfWeek.SATURDAY ||
+                        todayDayOfWeek == java.time.DayOfWeek.SUNDAY;
+
+            case MONTHLY:
+                if (reminder.getStartDate() != null) {
+                    try {
+                        LocalDate startDate = LocalDate.parse(reminder.getStartDate());
+                        return today.getDayOfMonth() == startDate.getDayOfMonth();
+                    } catch (Exception e) {
+                        return false;
+                    }
+                }
+                return false;
+
+            case NONE:
+                if (reminder.getStartDate() != null && reminder.getEndDate() != null) {
+                    try {
+                        LocalDate startDate = LocalDate.parse(reminder.getStartDate());
+                        LocalDate endDate = LocalDate.parse(reminder.getEndDate());
+                        return !today.isBefore(startDate) && !today.isAfter(endDate);
+                    } catch (Exception e) {
+                        return false;
+                    }
+                }
+                return reminder.getLastTriggered() == null;
+
+            default:
+                return false;
+        }
     }
 
-    private void triggerReminder(Reminder reminder) {
-        log.info("Triggering reminder: {} for user: {}", reminder.getId(), reminder.getUser().getId());
+    /**
+     * 将 java.time.DayOfWeek 转换为 Reminder.DayOfWeek
+     */
+    private Reminder.DayOfWeek convertToReminderDay(java.time.DayOfWeek dayOfWeek) {
+        return switch (dayOfWeek) {
+            case MONDAY -> Reminder.DayOfWeek.MONDAY;
+            case TUESDAY -> Reminder.DayOfWeek.TUESDAY;
+            case WEDNESDAY -> Reminder.DayOfWeek.WEDNESDAY;
+            case THURSDAY -> Reminder.DayOfWeek.THURSDAY;
+            case FRIDAY -> Reminder.DayOfWeek.FRIDAY;
+            case SATURDAY -> Reminder.DayOfWeek.SATURDAY;
+            case SUNDAY -> Reminder.DayOfWeek.SUNDAY;
+        };
+    }
 
-        // 这里可以添加实际的提醒触发逻辑
-        // 例如：发送通知、调用设备API播放语音等
+    /**
+     * 计算下次触发时间
+     */
+    private void calculateNextTriggerTime(Reminder reminder) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime nextTrigger = LocalDateTime.of(now.toLocalDate(), reminder.getRemindTime());
+
+        if (nextTrigger.isBefore(now)) {
+            nextTrigger = nextTrigger.plusDays(1);
+        }
+
+        switch (reminder.getRepeatType()) {
+            case DAILY:
+                // 每天，保持当前计算
+                break;
+            case WEEKLY:
+                // 每周特定几天
+                if (reminder.getRepeatDays() != null && !reminder.getRepeatDays().isEmpty()) {
+                    nextTrigger = calculateNextWeeklyTrigger(reminder, nextTrigger);
+                }
+                break;
+            case WORKDAYS:
+                // 工作日
+                while (isWeekend(nextTrigger.toLocalDate())) {
+                    nextTrigger = nextTrigger.plusDays(1);
+                }
+                break;
+            case WEEKENDS:
+                // 周末
+                while (!isWeekend(nextTrigger.toLocalDate())) {
+                    nextTrigger = nextTrigger.plusDays(1);
+                }
+                break;
+            case NONE:
+            default:
+                // 不重复，如果已经触发过，则设为 null
+                if (reminder.getLastTriggered() != null) {
+                    nextTrigger = null;
+                }
+                break;
+        }
+
+        reminder.setNextTrigger(nextTrigger);
+    }
+
+    /**
+     * 计算每周提醒的下次触发时间
+     */
+    private LocalDateTime calculateNextWeeklyTrigger(Reminder reminder, LocalDateTime baseTime) {
+        LocalDateTime nextTrigger = baseTime;
+        int maxAttempts = 7;
+        int attempts = 0;
+
+        while (attempts < maxAttempts) {
+            java.time.DayOfWeek dayOfWeek = nextTrigger.getDayOfWeek();
+            Reminder.DayOfWeek reminderDay = convertToReminderDay(dayOfWeek);
+
+            if (reminder.getRepeatDays().contains(reminderDay)) {
+                return nextTrigger;
+            }
+
+            nextTrigger = nextTrigger.plusDays(1);
+            attempts++;
+        }
+
+        return baseTime;
+    }
+
+    /**
+     * 判断是否是周末
+     */
+    private boolean isWeekend(LocalDate date) {
+        java.time.DayOfWeek day = date.getDayOfWeek();
+        return day == java.time.DayOfWeek.SATURDAY || day == java.time.DayOfWeek.SUNDAY;
     }
 }

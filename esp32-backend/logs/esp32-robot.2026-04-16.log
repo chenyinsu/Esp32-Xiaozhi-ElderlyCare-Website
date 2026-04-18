@@ -1,0 +1,315 @@
+2026-04-16 23:17:53.668 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - Starting Esp32RobotApplication using Java 17.0.17 with PID 19616 (E:\esp32-robot\esp32-backend\target\classes started by 27863 in E:\esp32-robot\esp32-backend)
+2026-04-16 23:17:53.669 [restartedMain] DEBUG com.example.esp32_robot.Esp32RobotApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-04-16 23:17:53.670 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-16 23:17:53.726 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-16 23:17:53.726 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-16 23:17:54.607 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-16 23:17:54.731 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 112 ms. Found 8 JPA repository interfaces.
+2026-04-16 23:17:55.812 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-04-16 23:17:55.841 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-04-16 23:17:55.848 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-16 23:17:55.849 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-04-16 23:17:55.962 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-04-16 23:17:55.963 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2235 ms
+2026-04-16 23:17:56.942 [restartedMain] INFO  o.s.o.j.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-16 23:17:56.976 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-16 23:17:57.194 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@44db6dad
+2026-04-16 23:17:57.196 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-16 23:17:57.246 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-16 23:17:57.246 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-04-16 23:17:58.969 [restartedMain] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 23:17:59.468 [restartedMain] INFO  o.s.data.jpa.repository.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-16 23:18:02.507 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 7dbbb59e-5785-466f-b438-a5c9031203d9
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-16 23:18:02.784 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@39d36bee, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@76b64beb, org.springframework.security.web.context.SecurityContextHolderFilter@70396c7c, org.springframework.security.web.header.HeaderWriterFilter@69e7c7cd, org.springframework.web.filter.CorsFilter@4ff7f91c, org.springframework.security.web.csrf.CsrfFilter@5d4a6280, org.springframework.security.web.authentication.logout.LogoutFilter@19d958e8, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@11a1f894, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@73071de4, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@c435da5, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@73c78da2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@e8913ed, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@24f92f41, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2eedcbd8, org.springframework.security.web.access.ExceptionTranslationFilter@8607755, org.springframework.security.web.access.intercept.AuthorizationFilter@2bff877]
+2026-04-16 23:18:02.907 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-04-16 23:18:02.928 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-04-16 23:18:02.978 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-04-16 23:18:02.999 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - Started Esp32RobotApplication in 9.951 seconds (process running for 10.59)
+2026-04-16 23:18:03.019 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:18:03.037 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:18:03.132 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:18:33.139 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:18:33.141 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:18:33.143 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:19:03.153 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:19:03.154 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:19:03.160 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:19:33.177 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:19:33.178 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:19:33.185 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:19:54.900 [SpringApplicationShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 23:19:54.918 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-16 23:19:54.953 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-16 23:19:58.369 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - Starting Esp32RobotApplication using Java 17.0.17 with PID 9404 (E:\esp32-robot\esp32-backend\target\classes started by 27863 in E:\esp32-robot\esp32-backend)
+2026-04-16 23:19:58.371 [restartedMain] DEBUG com.example.esp32_robot.Esp32RobotApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-04-16 23:19:58.372 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-16 23:19:58.445 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-16 23:19:58.446 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-16 23:19:59.589 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-16 23:19:59.772 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 165 ms. Found 8 JPA repository interfaces.
+2026-04-16 23:20:01.120 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-04-16 23:20:01.146 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-04-16 23:20:01.153 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-16 23:20:01.154 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-04-16 23:20:01.363 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-04-16 23:20:01.365 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2916 ms
+2026-04-16 23:20:02.508 [restartedMain] INFO  o.s.o.j.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-16 23:20:02.541 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-16 23:20:02.798 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@75392e97
+2026-04-16 23:20:02.800 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-16 23:20:02.849 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-16 23:20:02.850 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-04-16 23:20:04.994 [restartedMain] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 23:20:05.736 [restartedMain] INFO  o.s.data.jpa.repository.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-16 23:20:10.160 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@46176aec, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@233d8fa0, org.springframework.security.web.context.SecurityContextHolderFilter@42c6cf5f, org.springframework.security.web.header.HeaderWriterFilter@7e21aa60, org.springframework.web.filter.CorsFilter@771ce847, org.springframework.security.web.csrf.CsrfFilter@61e7a0a2, org.springframework.security.web.authentication.logout.LogoutFilter@3c00e06a, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@33d65955, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@745b7807, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@22ff3547, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@335ad2bc, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5fcf53c4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1ce8a923, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5fc27bfe, org.springframework.security.web.access.ExceptionTranslationFilter@2ada7d3b, org.springframework.security.web.access.intercept.AuthorizationFilter@693a9be4]
+2026-04-16 23:20:10.350 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-04-16 23:20:10.381 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-04-16 23:20:10.466 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-04-16 23:20:10.498 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - Started Esp32RobotApplication in 12.934 seconds (process running for 13.941)
+2026-04-16 23:20:10.517 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:20:10.557 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:20:10.866 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:20:34.852 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-16 23:20:34.852 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-16 23:20:34.853 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-04-16 23:20:40.876 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:20:40.879 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:20:40.881 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:21:10.884 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:21:10.886 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:21:10.895 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:21:40.906 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:21:40.907 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:21:40.913 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:21:45.126 [SpringApplicationShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 23:21:45.141 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-16 23:21:45.177 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-16 23:22:41.776 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - Starting Esp32RobotApplication using Java 17.0.17 with PID 17448 (E:\esp32-robot\esp32-backend\target\classes started by 27863 in E:\esp32-robot\esp32-backend)
+2026-04-16 23:22:41.778 [restartedMain] DEBUG com.example.esp32_robot.Esp32RobotApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-04-16 23:22:41.780 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-16 23:22:41.855 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-16 23:22:41.855 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-16 23:22:42.954 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-16 23:22:43.133 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 161 ms. Found 8 JPA repository interfaces.
+2026-04-16 23:22:44.737 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-04-16 23:22:44.771 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-04-16 23:22:44.776 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-16 23:22:44.777 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-04-16 23:22:44.964 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-04-16 23:22:44.966 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3109 ms
+2026-04-16 23:22:45.969 [restartedMain] INFO  o.s.o.j.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-16 23:22:46.000 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-16 23:22:46.262 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1a73e975
+2026-04-16 23:22:46.265 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-16 23:22:46.323 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-16 23:22:46.324 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-04-16 23:22:47.939 [restartedMain] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 23:22:48.405 [restartedMain] INFO  o.s.data.jpa.repository.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-16 23:22:52.404 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@47def5d7, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@40250166, org.springframework.security.web.context.SecurityContextHolderFilter@7ab99e1c, org.springframework.security.web.header.HeaderWriterFilter@2fb27, org.springframework.web.filter.CorsFilter@37df8f14, org.springframework.security.web.csrf.CsrfFilter@4c6c9432, org.springframework.security.web.authentication.logout.LogoutFilter@204a2939, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@397758a0, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@10906ec1, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@698eca4c, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@757e504a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4e5f8bc5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1ab46467, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@594efae7, org.springframework.security.web.access.ExceptionTranslationFilter@35b118a5, org.springframework.security.web.access.intercept.AuthorizationFilter@6e62e51e]
+2026-04-16 23:22:52.611 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-04-16 23:22:52.647 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-04-16 23:22:52.734 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-04-16 23:22:52.777 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - Started Esp32RobotApplication in 11.758 seconds (process running for 12.705)
+2026-04-16 23:22:52.817 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:22:52.863 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:22:53.143 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:23:18.769 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-16 23:23:18.769 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-16 23:23:18.770 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-04-16 23:23:23.147 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:23:23.149 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:23:23.153 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:23:53.167 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:23:53.169 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:23:53.178 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:24:23.194 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:24:23.196 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:24:23.201 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:24:53.217 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:24:53.219 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:24:53.224 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:25:23.239 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:25:23.240 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:25:23.245 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:25:38.270 [SpringApplicationShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 23:25:38.291 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-16 23:25:38.328 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-16 23:27:05.724 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - Starting Esp32RobotApplication using Java 17.0.17 with PID 15476 (E:\esp32-robot\esp32-backend\target\classes started by 27863 in E:\esp32-robot\esp32-backend)
+2026-04-16 23:27:05.726 [restartedMain] DEBUG com.example.esp32_robot.Esp32RobotApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-04-16 23:27:05.727 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-16 23:27:05.782 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-16 23:27:05.782 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-16 23:27:06.565 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-16 23:27:06.678 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 98 ms. Found 8 JPA repository interfaces.
+2026-04-16 23:27:07.660 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-04-16 23:27:07.688 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-04-16 23:27:07.692 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-16 23:27:07.692 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-04-16 23:27:07.800 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-04-16 23:27:07.803 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2018 ms
+2026-04-16 23:27:08.488 [restartedMain] INFO  o.s.o.j.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-16 23:27:08.513 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-16 23:27:08.679 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@32c40a6e
+2026-04-16 23:27:08.680 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-16 23:27:08.722 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-16 23:27:08.723 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-04-16 23:27:10.129 [restartedMain] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 23:27:10.608 [restartedMain] INFO  o.s.data.jpa.repository.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-16 23:27:13.507 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3870df3f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6e7adcbf, org.springframework.security.web.context.SecurityContextHolderFilter@272feb6f, org.springframework.security.web.header.HeaderWriterFilter@7d51c75, org.springframework.web.filter.CorsFilter@437df58f, org.springframework.security.web.csrf.CsrfFilter@1323c43c, org.springframework.security.web.authentication.logout.LogoutFilter@45faddd9, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2520ebe1, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@191be30, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@3d0e1a60, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@59a78c6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@259605f1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4812441d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3b9b3d9, org.springframework.security.web.access.ExceptionTranslationFilter@53936f50, org.springframework.security.web.access.intercept.AuthorizationFilter@19fb9292]
+2026-04-16 23:27:13.665 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-04-16 23:27:13.686 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-04-16 23:27:13.734 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-04-16 23:27:13.758 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - Started Esp32RobotApplication in 8.559 seconds (process running for 9.127)
+2026-04-16 23:27:13.766 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:27:13.798 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:27:13.987 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:27:17.243 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-16 23:27:17.243 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-16 23:27:17.244 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-04-16 23:27:44.005 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:27:44.006 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:27:44.008 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:28:14.015 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:28:14.017 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:28:14.021 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:28:26.315 [SpringApplicationShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 23:28:26.325 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-16 23:28:26.342 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-16 23:28:29.279 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - Starting Esp32RobotApplication using Java 17.0.17 with PID 25856 (E:\esp32-robot\esp32-backend\target\classes started by 27863 in E:\esp32-robot\esp32-backend)
+2026-04-16 23:28:29.280 [restartedMain] DEBUG com.example.esp32_robot.Esp32RobotApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-04-16 23:28:29.281 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-16 23:28:29.328 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-16 23:28:29.337 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-16 23:28:30.140 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-16 23:28:30.250 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 100 ms. Found 8 JPA repository interfaces.
+2026-04-16 23:28:31.188 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-04-16 23:28:31.203 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-04-16 23:28:31.206 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-16 23:28:31.206 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-04-16 23:28:31.302 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-04-16 23:28:31.304 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1966 ms
+2026-04-16 23:28:31.987 [restartedMain] INFO  o.s.o.j.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-16 23:28:32.011 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-16 23:28:32.167 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7711ed6c
+2026-04-16 23:28:32.170 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-16 23:28:32.203 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-16 23:28:32.203 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-04-16 23:28:33.560 [restartedMain] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 23:28:33.966 [restartedMain] INFO  o.s.data.jpa.repository.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-16 23:28:36.593 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@61199661, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@bdeba6a, org.springframework.security.web.context.SecurityContextHolderFilter@70abb4d8, org.springframework.security.web.header.HeaderWriterFilter@53936f50, org.springframework.web.filter.CorsFilter@3870df3f, org.springframework.security.web.csrf.CsrfFilter@6ee5a892, org.springframework.security.web.authentication.logout.LogoutFilter@73e1032, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2bed4e8f, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@3e75e08d, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@6e7adcbf, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@4b042525, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@272feb6f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@8b67d4b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@437df58f, org.springframework.security.web.access.ExceptionTranslationFilter@29db722c, org.springframework.security.web.access.intercept.AuthorizationFilter@15fb2e9f]
+2026-04-16 23:28:36.721 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-04-16 23:28:36.796 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-04-16 23:28:36.825 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - Started Esp32RobotApplication in 8.067 seconds (process running for 8.709)
+2026-04-16 23:28:36.846 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:28:36.876 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:28:37.013 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:28:37.040 [SpringApplicationShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 23:28:37.043 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-16 23:28:37.051 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-16 23:37:49.792 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - Starting Esp32RobotApplication using Java 17.0.17 with PID 24448 (E:\esp32-robot\esp32-backend\target\classes started by 27863 in E:\esp32-robot\esp32-backend)
+2026-04-16 23:37:49.794 [restartedMain] DEBUG com.example.esp32_robot.Esp32RobotApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-04-16 23:37:49.795 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-16 23:37:49.877 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-16 23:37:49.877 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-16 23:37:51.041 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-16 23:37:51.147 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 97 ms. Found 8 JPA repository interfaces.
+2026-04-16 23:37:52.496 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-04-16 23:37:52.518 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-04-16 23:37:52.522 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-16 23:37:52.523 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-04-16 23:37:52.665 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-04-16 23:37:52.666 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2787 ms
+2026-04-16 23:37:53.468 [restartedMain] INFO  o.s.o.j.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-16 23:37:53.534 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-16 23:37:53.713 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@572e4f7a
+2026-04-16 23:37:53.715 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-16 23:37:53.750 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-16 23:37:53.751 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-04-16 23:37:55.347 [restartedMain] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 23:37:55.745 [restartedMain] INFO  o.s.data.jpa.repository.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-16 23:37:59.198 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7c9feb70, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3d2671b, org.springframework.security.web.context.SecurityContextHolderFilter@2e6240c, org.springframework.security.web.header.HeaderWriterFilter@48422d26, org.springframework.web.filter.CorsFilter@4c53336a, org.springframework.security.web.csrf.CsrfFilter@1a53f7d9, org.springframework.security.web.authentication.logout.LogoutFilter@510fc08f, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@33f5f672, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@4141d1b3, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@398a4374, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@1c7c79c9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@d5f996f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@67b2987d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3acdeb5e, org.springframework.security.web.access.ExceptionTranslationFilter@3409af0c, org.springframework.security.web.access.intercept.AuthorizationFilter@43b7b061]
+2026-04-16 23:37:59.346 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-04-16 23:37:59.372 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-04-16 23:37:59.432 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-04-16 23:37:59.464 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - Started Esp32RobotApplication in 10.43 seconds (process running for 11.258)
+2026-04-16 23:37:59.487 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:37:59.507 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:37:59.606 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:38:10.074 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-16 23:38:10.075 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-16 23:38:10.076 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-04-16 23:38:23.086 [http-nio-8080-exec-2] INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 937 ms
+2026-04-16 23:38:29.622 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:38:29.623 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:38:29.625 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:38:59.629 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:38:59.630 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:38:59.636 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:39:29.645 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:39:29.647 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:39:29.652 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:39:59.660 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:39:59.661 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:39:59.666 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:40:29.675 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:40:29.676 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:40:29.680 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:40:59.691 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:40:59.692 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:40:59.695 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:41:29.709 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:41:29.711 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:41:29.714 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:41:59.729 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:41:59.730 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:41:59.732 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:42:29.743 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:42:29.744 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:42:29.747 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:42:48.787 [SpringApplicationShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 23:42:48.801 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-16 23:42:48.825 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-16 23:46:59.485 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - Starting Esp32RobotApplication using Java 17.0.17 with PID 28240 (E:\esp32-robot\esp32-backend\target\classes started by 27863 in E:\esp32-robot\esp32-backend)
+2026-04-16 23:46:59.487 [restartedMain] DEBUG com.example.esp32_robot.Esp32RobotApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-04-16 23:46:59.488 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-16 23:46:59.544 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-16 23:46:59.545 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-16 23:47:00.451 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-16 23:47:00.547 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 88 ms. Found 8 JPA repository interfaces.
+2026-04-16 23:47:01.588 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-04-16 23:47:01.605 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-04-16 23:47:01.609 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-16 23:47:01.610 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-04-16 23:47:01.715 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-04-16 23:47:01.717 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2171 ms
+2026-04-16 23:47:02.559 [restartedMain] INFO  o.s.o.j.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-16 23:47:02.608 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-16 23:47:02.752 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@20b14309
+2026-04-16 23:47:02.753 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-16 23:47:02.786 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-16 23:47:02.787 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-04-16 23:47:04.067 [restartedMain] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 23:47:04.443 [restartedMain] INFO  o.s.data.jpa.repository.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-16 23:47:08.027 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@223d2b19, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5d822323, org.springframework.security.web.context.SecurityContextHolderFilter@19ea34f5, org.springframework.security.web.header.HeaderWriterFilter@419f77d6, org.springframework.web.filter.CorsFilter@6b0d9f7a, org.springframework.security.web.csrf.CsrfFilter@4049f292, org.springframework.security.web.authentication.logout.LogoutFilter@6ce7f5a1, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@55047b5f, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@7b395a17, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@755c5aa, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7161c431, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4fd8287a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@76e5115e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4cfb43ba, org.springframework.security.web.access.ExceptionTranslationFilter@13bf88e, org.springframework.security.web.access.intercept.AuthorizationFilter@6d81f3b4]
+2026-04-16 23:47:08.169 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-04-16 23:47:08.198 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-04-16 23:47:08.269 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-04-16 23:47:08.299 [restartedMain] INFO  com.example.esp32_robot.Esp32RobotApplication - Started Esp32RobotApplication in 9.431 seconds (process running for 10.017)
+2026-04-16 23:47:08.317 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:47:08.342 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:47:08.455 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:47:30.499 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-16 23:47:30.499 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-16 23:47:30.500 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2026-04-16 23:47:31.707 [http-nio-8080-exec-1] INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 1157 ms
+2026-04-16 23:47:38.469 [scheduling-1] DEBUG c.example.esp32_robot.scheduler.ReminderScheduler - Checking due reminders...
+2026-04-16 23:47:38.471 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Fetching due reminders
+2026-04-16 23:47:38.473 [scheduling-1] INFO  c.e.esp32_robot.service.impl.ReminderServiceImpl - Found 0 due reminders
+2026-04-16 23:48:08.251 [SpringApplicationShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 23:48:08.269 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-16 23:48:08.311 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

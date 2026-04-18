@@ -11,9 +11,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ApiResponse<T> {
-    private boolean success;
-    private String message;
+
+    @Builder.Default  // ✅ 添加这个注解
+    private boolean success = true;
+
+    @Builder.Default  // ✅ 添加这个注解
+    private String message = "操作成功";
+
     private T data;
+
+    @Builder.Default  // ✅ 添加这个注解
     private LocalDateTime timestamp = LocalDateTime.now();
 
     public static <T> ApiResponse<T> success(T data) {
@@ -21,6 +28,7 @@ public class ApiResponse<T> {
                 .success(true)
                 .message("操作成功")
                 .data(data)
+                .timestamp(LocalDateTime.now())
                 .build();
     }
 
@@ -29,6 +37,7 @@ public class ApiResponse<T> {
                 .success(true)
                 .message(message)
                 .data(data)
+                .timestamp(LocalDateTime.now())
                 .build();
     }
 
@@ -36,7 +45,7 @@ public class ApiResponse<T> {
         return ApiResponse.<T>builder()
                 .success(false)
                 .message(message)
-                .data(null)
+                .timestamp(LocalDateTime.now())
                 .build();
     }
 }

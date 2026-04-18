@@ -1,5 +1,8 @@
-# esp32-backend/src/main/resources/application.yml
 spring:
+  security:
+    user:
+      name: admin
+      password: admin123
   application:
     name: esp32-robot
   jpa:

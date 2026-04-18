@@ -10,7 +10,7 @@ import com.example.esp32_robot.exception.ResourceNotFoundException;
 import com.example.esp32_robot.repository.DeviceRepository;
 import com.example.esp32_robot.repository.UserRepository;
 import com.example.esp32_robot.service.DeviceService;
-import com.example.esp32_robot.service.base.BaseService;
+import com.example.esp32_robot.service.BaseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -151,24 +151,35 @@ public class DeviceServiceImpl extends BaseService implements DeviceService {
     public PageResponse<DeviceResponse> queryDevices(DeviceQueryRequest request) {
         log.info("Querying devices with filters");
 
+        List<Device> devices;
+
+        if (request.getDeviceId() != null && !request.getDeviceId().isEmpty()) {
+            devices = deviceRepository.findByDeviceId(request.getDeviceId())
+                    .stream().toList();
+        } else if (request.getStatus() != null) {
+            devices = deviceRepository.findByStatus(request.getStatus());
+        } else {
+            devices = deviceRepository.findAll();
+        }
+
+        // 应用过滤条件
+        List<DeviceResponse> filteredResponses = filterAndConvertDevices(devices, request);
+
+        // 手动分页
         Pageable pageable = createPageable(request.getPage(), request.getSize(),
                 Sort.by(Sort.Direction.DESC, "updatedAt"));
 
-        Page<Device> devicePage;
+        int start = (int) pageable.getOffset();
+        int end = Math.min(start + pageable.getPageSize(), filteredResponses.size());
 
-        if (request.getDeviceId() != null) {
-            devicePage = deviceRepository.findByDeviceId(request.getDeviceId())
-                    .map(Page::of).orElse(Page.empty(pageable));
-        } else if (request.getStatus() != null) {
-            List<Device> devices = deviceRepository.findByStatus(request.getStatus());
-            devicePage = Page.empty(pageable);
+        List<DeviceResponse> pagedContent;
+        if (start < filteredResponses.size()) {
+            pagedContent = filteredResponses.subList(start, end);
         } else {
-            devicePage = deviceRepository.findAll(pageable);
+            pagedContent = List.of();
         }
 
-        List<DeviceResponse> filteredResponses = filterAndConvertDevices(devicePage.getContent(), request);
-
-        return PageResponse.of(filteredResponses, request.getPage(), request.getSize(),
+        return PageResponse.of(pagedContent, request.getPage(), request.getSize(),
                 (long) filteredResponses.size());
     }
 

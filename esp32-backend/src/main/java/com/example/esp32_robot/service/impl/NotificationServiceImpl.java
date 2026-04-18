@@ -9,7 +9,7 @@ import com.example.esp32_robot.exception.ResourceNotFoundException;
 import com.example.esp32_robot.repository.NotificationRepository;
 import com.example.esp32_robot.repository.UserRepository;
 import com.example.esp32_robot.service.NotificationService;
-import com.example.esp32_robot.service.base.BaseService;
+import com.example.esp32_robot.service.BaseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

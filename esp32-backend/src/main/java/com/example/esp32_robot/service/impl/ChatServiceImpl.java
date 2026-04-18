@@ -7,7 +7,7 @@ import com.example.esp32_robot.entity.Chat;
 import com.example.esp32_robot.exception.ResourceNotFoundException;
 import com.example.esp32_robot.repository.ChatRepository;
 import com.example.esp32_robot.service.ChatService;
-import com.example.esp32_robot.service.base.BaseService;
+import com.example.esp32_robot.service.BaseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

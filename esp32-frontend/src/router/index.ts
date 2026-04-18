@@ -1,52 +1,79 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { storage } from '@/utils/storage'
+
+const routes: RouteRecordRaw[] = [
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/Login/index.vue'),
+    meta: { requiresAuth: false }
+  },
+  {
+    path: '/',
+    component: () => import('@/components/Layout/index.vue'),
+    redirect: '/dashboard',
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: () => import('@/views/Dashboard/index.vue'),
+        meta: { title: '仪表盘', requiresAuth: true }
+      },
+      {
+        path: 'devices',
+        name: 'Devices',
+        component: () => import('@/views/Device/index.vue'),
+        meta: { title: '设备管理', requiresAuth: true }
+      },
+      {
+        path: 'emergencies',
+        name: 'Emergencies',
+        component: () => import('@/views/Emergency/index.vue'),
+        meta: { title: '紧急事件', requiresAuth: true }
+      },
+      {
+        path: 'reminders',
+        name: 'Reminders',
+        component: () => import('@/views/Reminder/index.vue'),
+        meta: { title: '提醒管理', requiresAuth: true }
+      },
+      {
+        path: 'users',
+        name: 'Users',
+        component: () => import('@/views/User/index.vue'),
+        meta: { title: '用户管理', requiresAuth: true, roles: ['STAFF', 'COMMUNITY'] }
+      },
+      {
+        path: 'chats',
+        name: 'Chats',
+        component: () => import('@/views/Chat/index.vue'),
+        meta: { title: '聊天记录', requiresAuth: true }
+      }
+    ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/dashboard'
+  }
+]
 
 const router = createRouter({
-history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: HomeView,
-      meta: { title: '首页 - ESP32健康助手' }
-    },
-    {
-      path: '/reminders',
-      name: 'reminders',
-      component: () => import('../views/ReminderView.vue'),
-      meta: { title: '提醒管理' }
-    },
-    {
-      path: '/emergencies',
-      name: 'emergencies',
-      component: () => import('../views/EmergencyView.vue'),
-      meta: { title: '紧急事件' }
-    },
-    {
-      path: '/chats',
-      name: 'chats',
-      component: () => import('../views/ChatView.vue'),
-      meta: { title: 'AI对话' }
-    },
-    {
-      path: '/reports',
-      name: 'reports',
-      component: () => import('../views/ReportView.vue'),
-      meta: { title: '分析报告' }
-    },
-    {
-      path: '/settings',
-      name: 'settings',
-      component: () => import('../views/SettingsView.vue'),
-      meta: { title: '系统设置' }
-    }
-  ]
+  history: createWebHistory(),
+  routes
 })
 
-// 路由守卫 - 设置页面标题
-router.beforeEach((to, from, next) => {
-  document.title = to.meta.title as string || 'ESP32健康助手'
-  next()
+// 路由守卫
+router.beforeEach((to, _from, next) => {
+  const token = storage.getToken()
+
+  if (to.meta.requiresAuth && !token) {
+    next({ name: 'Login' })
+  } else if (to.name === 'Login' && token) {
+    next({ name: 'Dashboard' })
+  } else {
+    next()
+  }
 })
 
 export default router

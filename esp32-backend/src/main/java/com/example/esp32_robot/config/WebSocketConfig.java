@@ -6,8 +6,8 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.esp32_robot.handler.DeviceWebSocketHandler;
-import com.example.esp32_robot.handler.AlertWebSocketHandler;
+import com.example.esp32_robot.websocket.DeviceWebSocketHandler;
+import com.example.esp32_robot.websocket.AlertWebSocketHandler;
 
 @Configuration
 @EnableWebSocket

@@ -1,36 +1,38 @@
 package com.example.esp32_robot.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-/**
- * 消息通知实体类
- * 用于系统内部消息通知
- */
 @Entity
 @Table(name = "notification")
 @Data
+@Builder  // ✅ 添加这个注解
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString(exclude = {"sender", "receiver"})
 @EqualsAndHashCode(exclude = {"sender", "receiver"})
 public class Notification {
 
     public enum NotificationType {
-        REMINDER,           // 提醒通知
-        EMERGENCY,          // 紧急事件通知
-        REPORT,             // 报告通知
-        SYSTEM,             // 系统通知
-        MESSAGE             // 普通消息
+        REMINDER,
+        EMERGENCY,
+        REPORT,
+        SYSTEM,
+        MESSAGE
     }
 
     public enum NotificationLevel {
-        INFO,       // 信息
-        WARNING,    // 警告
-        DANGER,     // 危险
-        CRITICAL    // 紧急
+        INFO,
+        WARNING,
+        DANGER,
+        CRITICAL
     }
 
     @Id
@@ -38,50 +40,51 @@ public class Notification {
     private Long id;
 
     @Column(nullable = false)
-    private String title;           // 通知标题
+    private String title;
 
     @Column(columnDefinition = "TEXT", nullable = false)
-    private String content;         // 通知内容
+    private String content;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private NotificationType type = NotificationType.SYSTEM;  // 通知类型
+    @Builder.Default
+    private NotificationType type = NotificationType.SYSTEM;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private NotificationLevel level = NotificationLevel.INFO;  // 通知级别
+    @Builder.Default
+    private NotificationLevel level = NotificationLevel.INFO;
 
-    // 发送者
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id")
     private User sender;
 
-    // 接收者
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "receiver_id", nullable = false)
     private User receiver;
 
     @Column(name = "is_read")
-    private Boolean isRead = false;  // 是否已读
+    @Builder.Default
+    private Boolean isRead = false;
 
     @Column(name = "read_time")
-    private LocalDateTime readTime;  // 阅读时间
+    private LocalDateTime readTime;
 
-    // 关联的业务ID
     @Column(name = "related_reminder_id")
-    private Long relatedReminderId;  // 关联的提醒ID
+    private Long relatedReminderId;
 
     @Column(name = "related_emergency_id")
-    private Long relatedEmergencyId; // 关联的紧急事件ID
+    private Long relatedEmergencyId;
 
     @Column(name = "related_report_id")
-    private Long relatedReportId;    // 关联的报告ID
+    private Long relatedReportId;
 
     @Column(name = "created_at")
+    @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "expires_at")
-    private LocalDateTime expiresAt;  // 过期时间
+    private LocalDateTime expiresAt;
 
     public boolean isExpired() {
         return expiresAt != null && LocalDateTime.now().isAfter(expiresAt);

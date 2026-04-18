@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
@@ -71,6 +72,24 @@ public class DeviceWebSocketHandler extends TextWebSocketHandler {
         sessions.remove(deviceId);
     }
 
+    // ✅ 添加 sendReminder 方法
+    public void sendReminder(String deviceId, Map<String, Object> reminderData) {
+        WebSocketSession session = sessions.get(deviceId);
+        if (session != null && session.isOpen()) {
+            try {
+                // 构建提醒消息
+                ReminderMessage msg = new ReminderMessage("reminder", reminderData);
+                String jsonMsg = objectMapper.writeValueAsString(msg);
+                session.sendMessage(new TextMessage(jsonMsg));
+                logger.info("提醒已发送到设备 {}: {}", deviceId, reminderData);
+            } catch (IOException e) {
+                logger.error("发送提醒到设备 {} 失败: {}", deviceId, e.getMessage());
+            }
+        } else {
+            logger.warn("设备 {} 不在线，无法发送提醒", deviceId);
+        }
+    }
+
     // 发送消息给指定设备
     public void sendToDevice(String deviceId, String message, String type) {
         WebSocketSession session = sessions.get(deviceId);
@@ -99,6 +118,17 @@ public class DeviceWebSocketHandler extends TextWebSocketHandler {
                 }
             }
         });
+    }
+
+    // 检查设备是否在线
+    public boolean isDeviceOnline(String deviceId) {
+        WebSocketSession session = sessions.get(deviceId);
+        return session != null && session.isOpen();
+    }
+
+    // 获取在线设备数量
+    public int getOnlineDeviceCount() {
+        return sessions.size();
     }
 
     private void sendMessage(WebSocketSession session, String message, String type) throws IOException {
@@ -157,6 +187,28 @@ public class DeviceWebSocketHandler extends TextWebSocketHandler {
         public void setType(String type) { this.type = type; }
         public String getData() { return data; }
         public void setData(String data) { this.data = data; }
+        public long getTimestamp() { return timestamp; }
+        public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
+    }
+
+    // ✅ 添加提醒消息类
+    private static class ReminderMessage {
+        private String type;
+        private Map<String, Object> data;
+        private long timestamp;
+
+        public ReminderMessage() {}
+
+        public ReminderMessage(String type, Map<String, Object> data) {
+            this.type = type;
+            this.data = data;
+            this.timestamp = System.currentTimeMillis();
+        }
+
+        public String getType() { return type; }
+        public void setType(String type) { this.type = type; }
+        public Map<String, Object> getData() { return data; }
+        public void setData(Map<String, Object> data) { this.data = data; }
         public long getTimestamp() { return timestamp; }
         public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
     }

@@ -4,11 +4,10 @@ import com.example.esp32_robot.dto.report.*;
 import com.example.esp32_robot.dto.common.PageResponse;
 import com.example.esp32_robot.dto.converter.DtoConverter;
 import com.example.esp32_robot.entity.*;
-import com.example.esp32_robot.exception.BusinessException;
 import com.example.esp32_robot.exception.ResourceNotFoundException;
 import com.example.esp32_robot.repository.*;
 import com.example.esp32_robot.service.ReportService;
-import com.example.esp32_robot.service.base.BaseService;
+import com.example.esp32_robot.service.BaseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -21,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service

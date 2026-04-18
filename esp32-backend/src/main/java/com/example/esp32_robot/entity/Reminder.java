@@ -44,6 +44,13 @@ public class Reminder {
         MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY, EVERYDAY
     }
 
+    public enum Priority {
+        LOW,        // 低
+        MEDIUM,     // 中
+        HIGH,       // 高
+        CRITICAL    // 紧急
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -64,6 +71,11 @@ public class Reminder {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private RepeatType repeatType = RepeatType.NONE;  // 重复类型
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "priority")
+    private Priority priority = Priority.MEDIUM;  // 优先级，默认中等
+
 
     // 重复的天数（每周的哪几天）
     @ElementCollection

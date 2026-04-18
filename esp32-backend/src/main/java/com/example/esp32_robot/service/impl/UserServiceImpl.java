@@ -9,7 +9,7 @@ import com.example.esp32_robot.exception.ResourceNotFoundException;
 import com.example.esp32_robot.exception.UnauthorizedException;
 import com.example.esp32_robot.repository.UserRepository;
 import com.example.esp32_robot.service.UserService;
-import com.example.esp32_robot.service.base.BaseService;
+import com.example.esp32_robot.service.BaseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -52,10 +52,6 @@ public class UserServiceImpl extends BaseService implements UserService {
         });
 
         User user = dtoConverter.toUserEntity(request);
-
-        // TODO: 密码加密
-        // user.setPassword(passwordEncoder.encode(request.getPassword()));
-
         User savedUser = userRepository.save(user);
         log.info("User created successfully with id: {}", savedUser.getId());
 
@@ -91,7 +87,6 @@ public class UserServiceImpl extends BaseService implements UserService {
 
         // 如果密码有变化
         if (StringUtils.hasText(request.getPassword())) {
-            // TODO: 密码加密
             user.setPassword(request.getPassword());
         }
 
@@ -160,7 +155,7 @@ public class UserServiceImpl extends BaseService implements UserService {
                 .filter(u -> filterByIsActive(u, request.getIsActive()))
                 .filter(u -> filterByHasDevice(u, request.getHasDevice()))
                 .map(dtoConverter::toUserResponse)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private boolean filterByName(User user, String name) {
@@ -225,11 +220,6 @@ public class UserServiceImpl extends BaseService implements UserService {
             throw new UnauthorizedException("Account is inactive");
         }
 
-        // TODO: 密码验证
-        // if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-        //     throw new UnauthorizedException("Invalid username or password");
-        // }
-
         if (!request.getPassword().equals(user.getPassword())) {
             throw new UnauthorizedException("Invalid username or password");
         }
@@ -249,6 +239,17 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
+    public void logout(String token) {
+        log.info("User logout");
+        tokenStore.remove(token);
+    }
+
+    @Override
+    public Long validateToken(String token) {
+        return tokenStore.get(token);
+    }
+
+    @Override
     public void changePassword(Long userId, PasswordChangeRequest request) {
         log.info("Changing password for user: {}", userId);
 
@@ -257,7 +258,12 @@ public class UserServiceImpl extends BaseService implements UserService {
 
         // 验证旧密码
         if (!request.getOldPassword().equals(user.getPassword())) {
-            throw new BusinessException("Invalid old password");
+            throw new BusinessException("旧密码不正确");
+        }
+
+        // 验证新密码与确认密码是否一致
+        if (request.getNewPassword() == null || !request.getNewPassword().equals(request.getConfirmPassword())) {
+            throw new BusinessException("新密码与确认密码不一致");
         }
 
         // 更新密码
@@ -269,7 +275,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public UserStatisticsResponse getStatistics() {
+    public UserStatisticsResponse getUserStatistics() {
         log.info("Calculating user statistics");
 
         List<User> allUsers = userRepository.findAll();
@@ -287,7 +293,10 @@ public class UserServiceImpl extends BaseService implements UserService {
 
         Map<String, Long> usersByGender = allUsers.stream()
                 .filter(u -> u.getGender() != null)
-                .collect(Collectors.groupingBy(u -> u.getGender().name(), Collectors.counting()));
+                .collect(Collectors.groupingBy(
+                        u -> u.getGender().name(),
+                        Collectors.counting()
+                ));
 
         Map<String, Double> averageAgeByRole = allUsers.stream()
                 .filter(u -> u.getAge() != null)
@@ -337,20 +346,5 @@ public class UserServiceImpl extends BaseService implements UserService {
 
         userRepository.updateUserStatus(ids, isActive);
         log.info("Batch update completed");
-    }
-
-    /**
-     * 验证令牌
-     */
-    public Long validateToken(String token) {
-        return tokenStore.get(token);
-    }
-
-    /**
-     * 登出
-     */
-    public void logout(String token) {
-        tokenStore.remove(token);
-        log.info("User logged out");
     }
 }
