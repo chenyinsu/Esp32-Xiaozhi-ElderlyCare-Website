@@ -4,61 +4,82 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg-primary: #f0f2f6;
+  --card-bg: rgba(255, 255, 255, 0.96);
+  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --border-radius: 20px;
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
 html, body, #app {
   height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  background: var(--bg-primary);
 }
 
-// 滚动条样式
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+// 滚动条
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #e0e0e0; border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #666; }
+
+// 玻璃卡片
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: var(--transition);
+}
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 3px;
+// Element Plus 组件圆润化
+.el-button {
+  border-radius: 12px !important;
+  font-weight: 500;
+  transition: var(--transition);
+}
+.el-button--primary {
+  background: linear-gradient(135deg, #409eff, #36d1ff);
+  border: none;
+}
+.el-card {
+  border-radius: var(--border-radius) !important;
+  overflow: hidden;
+  border: none;
+}
+.el-card__header {
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  font-weight: 600;
+  padding: 16px 24px;
+}
+.el-table {
+  border-radius: 16px;
+  overflow: hidden;
+}
+.el-table th.el-table__cell {
+  background-color: #f8fafc;
+  font-weight: 600;
+}
+.el-dialog {
+  border-radius: 24px !important;
+}
+.el-tag {
+  border-radius: 12px !important;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 3px;
-
-  &:hover {
-    background: #a8a8a8;
-  }
-}
-
-// 全局动画
+// 动画
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s ease;
 }
-
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-}
-
-// Element Plus 样式覆盖
-.el-card {
-  border-radius: 8px;
-
-  .el-card__header {
-    padding: 16px 20px;
-    border-bottom: 1px solid #f0f0f0;
-    font-weight: 500;
-  }
-}
-
-.el-button {
-  border-radius: 6px;
-}
-
-.el-table {
-  border-radius: 8px;
-
-  th.el-table__cell {
-    background-color: #f5f7fa;
-  }
 }

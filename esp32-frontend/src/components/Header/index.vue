@@ -12,6 +12,13 @@
     </div>
 
     <div class="right">
+      <!-- 通知中心 -->
+      <el-badge :value="unreadCount" :max="99" :hidden="unreadCount === 0" class="notification-badge">
+        <el-icon :size="20" class="notification-icon">
+          <Bell />
+        </el-icon>
+      </el-badge>
+
       <el-dropdown @command="handleCommand">
         <div class="user-info">
           <el-avatar :size="36" icon="UserFilled" />
@@ -20,9 +27,18 @@
         </div>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item command="profile">个人中心</el-dropdown-item>
-            <el-dropdown-item command="password">修改密码</el-dropdown-item>
-            <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
+            <el-dropdown-item command="profile">
+              <el-icon><User /></el-icon>
+              个人中心
+            </el-dropdown-item>
+            <el-dropdown-item command="password">
+              <el-icon><Lock /></el-icon>
+              修改密码
+            </el-dropdown-item>
+            <el-dropdown-item divided command="logout">
+              <el-icon><SwitchButton /></el-icon>
+              退出登录
+            </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -31,33 +47,68 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-import { ElMessage } from 'element-plus'
-import { Fold, Expand, ArrowDown } from '@element-plus/icons-vue'
+import { useNotificationStore } from '@/stores/notification'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import {
+  Fold, Expand, ArrowDown, Bell,
+  User, Lock, SwitchButton
+} from '@element-plus/icons-vue'
+
+defineProps<{
+  isCollapse: boolean
+}>()
+
+defineEmits<{
+  toggleSidebar: []
+}>()
 
 const route = useRoute()
 const router = useRouter()
 const authStore = useAuthStore()
+const notificationStore = useNotificationStore()
 
 const currentTitle = computed(() => route.meta.title || '')
+const unreadCount = computed(() => notificationStore.unreadCount)
 
 const handleCommand = async (command: string) => {
   switch (command) {
     case 'logout':
-      await authStore.logout()
-      ElMessage.success('已退出登录')
-      router.push('/login')
+      try {
+        await ElMessageBox.confirm('确定要退出登录吗？', '提示', {
+          type: 'warning'
+        })
+        await authStore.logout()
+        ElMessage.success('已退出登录')
+        router.push('/login')
+      } catch {
+        // 用户取消退出
+      }
       break
     case 'profile':
-      ElMessage.info('功能开发中')
+      router.push('/profile')
       break
     case 'password':
-      ElMessage.info('功能开发中')
+      router.push('/profile')
       break
   }
 }
+
+// 轮询通知
+let timer: number | null = null
+onMounted(() => {
+  timer = window.setInterval(() => {
+    // 可在此调用API获取未读通知数
+  }, 30000)
+})
+
+onUnmounted(() => {
+  if (timer) {
+    clearInterval(timer)
+  }
+})
 </script>
 
 <style scoped lang="scss">
@@ -83,17 +134,42 @@ const handleCommand = async (command: string) => {
   }
 
   .right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .notification-badge {
+      cursor: pointer;
+
+      .notification-icon {
+        color: #606266;
+
+        &:hover {
+          color: #409eff;
+        }
+      }
+    }
+
     .user-info {
       display: flex;
       align-items: center;
       gap: 8px;
       cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: background 0.2s;
+
+      &:hover {
+        background: #f5f7fa;
+      }
 
       .username {
         max-width: 120px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        font-size: 14px;
+        color: #1a1f2e;
       }
     }
   }
