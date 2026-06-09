@@ -38,3 +38,40 @@
 ---
 
 ## 🏗️ 系统架构图（简略）
+[ Vue 前端 ] --(WebSocket/REST)--> [ Spring Boot 后端 ] --(串口/MQTT)--> [ ESP32 机器人 ]
+|
++---> [ MySQL ]
++---> [ OpenAI API / TTS ]
++---> [ EMQX MQTT Broker ]
+
+
+---
+
+## 🚀 快速开始
+
+### 环境要求
+
+- **后端**：JDK 17, Maven 3.8+, MySQL 8.0+
+- **前端**：Node.js 18+, npm 9+
+- **硬件（可选）**：ESP32 开发板、串口线、电机驱动板（如 L298N）
+- **MQTT Broker（可选）**：EMQX / Mosquitto（默认使用串口模式）
+
+### 一键启动（开发环境）
+
+```bash
+# 1. 克隆仓库
+git clone https://github.com/your-org/esp32-robot.git
+cd esp32-robot
+
+# 2. 启动 MySQL，创建数据库 esp32_robot（执行后端 resources/db/schema.sql）
+
+# 3. 启动后端（默认端口 8080）
+cd esp32-backend
+mvn spring-boot:run
+
+# 4. 启动前端（默认端口 5173）
+cd ../esp32-frontend
+npm install
+npm run dev
+
+# 5. （可选）连接真实 ESP32 或使用内置模拟器
